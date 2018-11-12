@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Convert</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+<body>
+   
+ <table width=auto border="1">
+   <tr>
+       <th>  Пара №                   </th>
+       <th>  Предворительный          </th>
+       <th>  На первую половину пары  </th>
+       <th>  На пятиминутку           </th>
+       <th>  Предворительны на пару   </th>
+       <th>  На вторую половину пары  </th>
+       <th>  Конец занятия            </th>
+   </tr>
+     
+<script>
+    
+    var cls=0,
+        current;
+    
+    
+    function plus(){
+        cls++;
+        
+        var x = '<tr> <th>' + cls + '</th>';
+        
+        for(var i=1;i<=6;i++){
+            
+            current= cls + "p" + i; 
+            
+            x += '<th>  <input class='+ current +' type="text" id="in">  </th>';
+        
+        }
+        x += '</tr>';
+        $('table').append(x);
+    }
+    
+</script>
+ 
+</table>
+       <button id="butt1" onclick="plus()">Добавить</button>
+      
+      <br><hr>
+       
+<textarea id="textbox">here</textarea> <button id="create">Create file</button> 
+<a download="info.txt" id="downloadlink" style="display: none">Download</a>
+
+<script>
+(function () {
+ var textFile = null,
+    makeTextFile = function (text) {
+        var data = new Blob([text], {type: 'text/plain'});
+
+        if (textFile !== null) {
+            window.URL.revokeObjectURL(textFile);
+        }
+
+        textFile = window.URL.createObjectURL(data);
+
+        return textFile;
+    };
+
+var create = document.getElementById('create'),
+    textbox = document.getElementById('textbox');
+
+  create.addEventListener('click', function () {
+    var link = document.getElementById('downloadlink');
+    link.href = makeTextFile(textbox.value);
+    link.style.display = 'block';
+  }, false);
+})();
+</script>
+
+
+</body>
+</html>
