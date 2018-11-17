@@ -25,7 +25,8 @@
         current,
         num=0,
         j=0,
-        result;
+        result,
+        result = '';
     
     
     function plus(){
@@ -41,19 +42,19 @@
     }
     
     function read(){
+        for(var y=1;y<6;y++){
         
-        //while(j>=cls){
             j++;
             for(var l=1;l<=6;l++){
                 var data = "."+j+"p"+l;
                 
-                num += $("."+j+"p"+l).val();
+                num = $(data).val();
                 for(var h=0; h<num.length; h++){
                     var rez = num[h];
 		           
-                    if(rez==":" && rez == num[2]){
+                    if(rez==":" && rez == num[1]){
                          var HOUR = Number.parseInt(num);
-                         var MINUTE = Number.parseInt(num[3] + num[4]);
+                         var MINUTE = Number.parseInt(num[2] + num[3]);
                         
                         if(MINUTE >59){
                             alert("Максимум 59 минут");
@@ -61,73 +62,64 @@
                         }
                     }
                     
-                    else if(rez==":" && rez == num[3]){
-                        if((num[1]+num[2])<24){
+                    else if(rez==":" && rez == num[2]){
+                        if((num[0]+num[1])<24){
                             var HOUR = Number.parseInt(num);
-                            var MINUTE = Number.parseInt(num[4] + num[5]); 
+                            var MINUTE = Number.parseInt(num[3] + num[4]); 
                             
                             if(MINUTE >59){
                                 alert("Максимум 59 минут");
                                 break;
-                        }
-                        }
-                        else {alert("В сутках всего 24 часа");
-                            break;
-                        }
-                        
+                            }
+                        }else alert("В сутках всего 24 часа");                                
                     }
                     //else alert("НЕВЕРНЫЙ ФОРМАТ"); break;
+                    var H = (HOUR*60)+MINUTE;
                 }
                 
-                  var Z = (HOUR*60)+MINUTE;
-                    
-                    alert(Z);
+                result += H + ",";
                 
             }
-        //alert("HOUR = "+HOUR);
-        //alert("MINUTE = "+ MINUTE);
-	         
-        //}
-        
+        //alert(Z);
+        }                      
+           result += "\n"; 	         
     }
         
-    
 </script>
  
 </table>
-       <button id="butt1" onclick="plus()">Добавить</button>
-       <button id="butt2" onclick="read()">Показать</button>
+       <br><button id="butt1" onclick="plus()">Добавить строку</button>
       
       <br><hr>
        
-<textarea id="textbox">here</textarea> <button id="create">Create file</button> 
-<a download="info.txt" id="downloadlink" style="display: none">Download</a>
+<button id="create" onclick="read()">Создать файл</button> <hr>
+<a download="CALL.txt" id="downloadlink" style="display: none">Скачать</a>
 
-<script>
-(function () {
- var textFile = null,
-    makeTextFile = function (text) {
-        var data = new Blob([text], {type: 'text/plain'});
+    <script>
+    
+        (function () {
+            var textFile = null,
+        makeTextFile = function (text) {
+            var data = new Blob([text], {type: 'text/plain'});
 
-        if (textFile !== null) {
-            window.URL.revokeObjectURL(textFile);
-        }
+            if (textFile !== null) {
+                window.URL.revokeObjectURL(textFile);
+            }
 
-        textFile = window.URL.createObjectURL(data);
+            textFile = window.URL.createObjectURL(data);
+            return textFile;
+        };
 
-        return textFile;
-    };
+            var create = document.getElementById('create');
 
-var create = document.getElementById('create'),
-    textbox = document.getElementById('textbox');
-
-  create.addEventListener('click', function () {
-    var link = document.getElementById('downloadlink');
-    link.href = makeTextFile(textbox.value);
-    link.style.display = 'block';
-  }, false);
+    create.addEventListener('click', function () {
+        var link = document.getElementById('downloadlink');
+        link.href = makeTextFile(result);
+        link.style.display = 'block';
+    }, false);
 })();
-</script>
+        
+    </script>
 
 
 </body>
