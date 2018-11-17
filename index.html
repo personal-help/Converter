@@ -61,7 +61,6 @@
                         
                         if(MINUTE >59){
                             alert("Максимум 59 минут");
-                            break;
                         }
                     }
                     
@@ -70,11 +69,12 @@
                             var HOUR = Number.parseInt(num);
                             var MINUTE = Number.parseInt(num[3] + num[4]); 
                             
-                            if(MINUTE >59){
+                            if(MINUTE > 59){
                                 alert("Максимум 59 минут");
                             }
-                        }else alert("В сутках всего 24 часа");                                
+                        }                               
                     }
+                        
                     var H = (HOUR*60)+MINUTE;
                 }
                 
@@ -88,11 +88,13 @@
 </script>
  
 </table>
+      
        <br><button id="butt1" onclick="plus()">Добавить строку</button>
+       <button id="butt2" onclick="read()">Отправить</button>
       
       <br><hr>
        
-<button id="create" onclick="read()">Создать файл</button> <hr>
+<button id="create">Создать файл</button> <hr>
 <a download="CALL.txt" id="downloadlink" style="display: none">Скачать</a>
 
     <script>
