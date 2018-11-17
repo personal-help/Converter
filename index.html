@@ -49,6 +49,9 @@
                 var data = "."+j+"p"+l;
                 
                 num = $(data).val();
+                
+                if(num != ''){
+                
                 for(var h=0; h<num.length; h++){
                     var rez = num[h];
 		           
@@ -69,20 +72,17 @@
                             
                             if(MINUTE >59){
                                 alert("Максимум 59 минут");
-                                break;
                             }
                         }else alert("В сутках всего 24 часа");                                
                     }
-                    //else alert("НЕВЕРНЫЙ ФОРМАТ"); break;
                     var H = (HOUR*60)+MINUTE;
                 }
                 
-                result += H + ",";
+                result += H + ",";   
+                }
                 
             }
-        //alert(Z);
-        }                      
-           result += "\n"; 	         
+        }                        
     }
         
 </script>
